@@ -23,7 +23,7 @@ namespace SeleniumProject
         [SetUp]
         public void SetUp()
         {
-            driver = new RemoteWebDriver(new Uri("http://localhost:4444/wd/hub"), new ChromeOptions().ToCapabilities());
+            driver = new ChromeDriver("C:\\selenium\\Chrome");
             js = (IJavaScriptExecutor)driver;
             vars = new Dictionary<string, object>();
         }
@@ -35,8 +35,14 @@ namespace SeleniumProject
         [Test]
         public void logout()
         {
-            driver.Navigate().GoToUrl("http://20.67.220.11/home");
+            driver.Navigate().GoToUrl("http://localhost:4200/login");
             driver.Manage().Window.Size = new System.Drawing.Size(1936, 1056);
+            driver.FindElement(By.CssSelector(".username")).Click();
+            driver.FindElement(By.CssSelector(".username")).SendKeys("jackreilly@gmail.com");
+            driver.FindElement(By.CssSelector(".password")).SendKeys("testpass");
+            driver.FindElement(By.CssSelector(".login")).Click(); 
+            
+
             driver.FindElement(By.CssSelector(".nav:nth-child(3)")).Click();
         }
     }
